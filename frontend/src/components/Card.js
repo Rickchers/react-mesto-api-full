@@ -9,14 +9,18 @@ function Card(props) {
     // Определяем, являемся ли мы владельцем текущей карточки
     //const isOwn = props.card.owner._id === currentUser._id;
     const isOwn = props.card.owner === currentUser._id;
-    
+    // console.log(`card own ${isOwn}`);
+    // console.log(`card owner is ${props.card.owner}`);
+    // console.log(`user cu id is ${currentUser._id}`);
 
     const cardDeleteButtonClassName = (
         `card__button-image ${isOwn ? 'card__button-image_visible' : 'card__button-image_hidden'}`
     );
     
     // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-    const isLiked = props.card.likes.some(i => i._id === currentUser._id);
+    const isLiked = props.card.likes.some(i => i == currentUser._id);
+    //const isLiked = props.card.likes.some(i => console.log(i==currentUser._id));
+    //console.log(currentUser._id);
 
     const cardLikeButtonClassName = (
         `card__heart ${isLiked ? 'card__heart_active' : 'card__heart'}`
