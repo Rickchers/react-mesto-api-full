@@ -5,9 +5,10 @@ import trashImagePath from '../images/Trash.svg';
 
 function Card(props) {
     const currentUser = React.useContext(CurrentUserContext);
-
+    
     // Определяем, являемся ли мы владельцем текущей карточки
-    const isOwn = props.card.owner._id === currentUser._id;
+    //const isOwn = props.card.owner._id === currentUser._id;
+    const isOwn = props.card.owner === currentUser._id;
     
 
     const cardDeleteButtonClassName = (

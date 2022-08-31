@@ -7,15 +7,25 @@ class Api {
   changeLikeCardStatus(id, isLiked) {
     
     if (isLiked) {
-      return fetch(`${this._url}cards/${id}/likes`, {
+      //`${this._url}cards/${id}/likes`
+      return fetch(`http://localhost:3001/cards/${id}/likes`, {
         method: 'DELETE',
-        headers: this._headers
+        //headers: this._headers
+        headers: {
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzBjNmNhZDQyMjVmZGI2MDRhNjVjYTUiLCJpYXQiOjE2NjE5MzU0MTQsImV4cCI6MTY2MjU0MDIxNH0.TK4wUpHkYR76K25Qxdl3rYL3JM810Vfcha6cnZQyoNA',
+          'Content-Type': 'application/json'
+        }
       })
       .then(this._checkResponse);
     } else if (!isLiked) {
-      return fetch(`${this._url}cards/${id}/likes`, {
+      //`${this._url}cards/${id}/likes`
+      return fetch(`http://localhost:3001/cards/${id}/likes`, {
         method: 'PUT',
-        headers: this._headers
+        headers: {
+          authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzBjNmNhZDQyMjVmZGI2MDRhNjVjYTUiLCJpYXQiOjE2NjE5MzU0MTQsImV4cCI6MTY2MjU0MDIxNH0.TK4wUpHkYR76K25Qxdl3rYL3JM810Vfcha6cnZQyoNA',
+          'Content-Type': 'application/json'
+        }
+        //headers: this._headers
       })
       .then(this._checkResponse);
     }   
@@ -23,9 +33,14 @@ class Api {
  
 
   getUserData() {
-    return fetch(`${this._url}users/me`, {
+    //`${this._url}users/me`
+    return fetch('http://localhost:3001/users/me', {
       method: 'GET',
-      headers: this._headers
+      //headers: this._headers
+      headers: {
+        authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzBjNmNhZDQyMjVmZGI2MDRhNjVjYTUiLCJpYXQiOjE2NjE5MzU0MTQsImV4cCI6MTY2MjU0MDIxNH0.TK4wUpHkYR76K25Qxdl3rYL3JM810Vfcha6cnZQyoNA',
+        'Content-Type': 'application/json'
+      }
 
     })
     .then(this._checkResponse);
@@ -33,9 +48,14 @@ class Api {
 
 
   setUserData(name, about) {
-    return fetch(`${this._url}users/me`, {
+    //`${this._url}users/me`
+    return fetch('http://localhost:3001/users/me', {
       method: 'PATCH',
-      headers: this._headers,
+      // headers: this._headers,
+      headers: {
+        authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzBjNmNhZDQyMjVmZGI2MDRhNjVjYTUiLCJpYXQiOjE2NjE5MzU0MTQsImV4cCI6MTY2MjU0MDIxNH0.TK4wUpHkYR76K25Qxdl3rYL3JM810Vfcha6cnZQyoNA',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         name: name,
         about: about
@@ -46,9 +66,14 @@ class Api {
   }
 
   setAvatar(link) {
-    return fetch(`${this._url}users/me/avatar`, {
+    //`${this._url}users/me/avatar`
+    return fetch('http://localhost:3001/users/me/avatar', {
       method: 'PATCH',
-      headers: this._headers,
+      // headers: this._headers,
+      headers: {
+        authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzBjNmNhZDQyMjVmZGI2MDRhNjVjYTUiLCJpYXQiOjE2NjE5MzU0MTQsImV4cCI6MTY2MjU0MDIxNH0.TK4wUpHkYR76K25Qxdl3rYL3JM810Vfcha6cnZQyoNA',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         avatar: link
       })
@@ -58,9 +83,14 @@ class Api {
   }
 
   removeCard(id) {
-    return fetch(`${this._url}cards/${id}`, {
+    //`${this._url}cards/${id}`
+    return fetch(`http://localhost:3001/cards/${id}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: {
+        authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzBjNmNhZDQyMjVmZGI2MDRhNjVjYTUiLCJpYXQiOjE2NjE5MzU0MTQsImV4cCI6MTY2MjU0MDIxNH0.TK4wUpHkYR76K25Qxdl3rYL3JM810Vfcha6cnZQyoNA',
+        'Content-Type': 'application/json'
+      }
+      //headers: this._headers
     })
     .then(this._checkResponse);
   }
@@ -74,17 +104,26 @@ class Api {
 
 
   getCards() {
-    return fetch(`${this._url}cards`, {
+    return fetch('http://localhost:3001/cards/', {
       method: 'GET',
-      headers: this._headers
+      //headers: this._headers
+      headers: {
+        authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzBjNmNhZDQyMjVmZGI2MDRhNjVjYTUiLCJpYXQiOjE2NjE5MzU0MTQsImV4cCI6MTY2MjU0MDIxNH0.TK4wUpHkYR76K25Qxdl3rYL3JM810Vfcha6cnZQyoNA',
+        'Content-Type': 'application/json'
+      }
     })
     .then(this._checkResponse);
   }
 
   postNewCard(data) {
-    return fetch(`${this._url}cards`, {
+    //`${this._url}cards`
+    return fetch('http://localhost:3001/cards', {
       method: 'POST',
-      headers: this._headers,
+      //headers: this._headers,
+      headers: {
+        authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzBjNmNhZDQyMjVmZGI2MDRhNjVjYTUiLCJpYXQiOjE2NjE5MzU0MTQsImV4cCI6MTY2MjU0MDIxNH0.TK4wUpHkYR76K25Qxdl3rYL3JM810Vfcha6cnZQyoNA',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         name: data.name,
         link: data.link

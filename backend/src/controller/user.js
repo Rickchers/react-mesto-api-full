@@ -43,7 +43,7 @@ exports.getUserProfile = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Пользователь не найден');
       }
-      res.send({ data: user });
+      res.send(user);
     })
     .catch(next);
 };
@@ -82,7 +82,7 @@ exports.updateUser = (req, res, next) => {
     { new: true, runValidators: true },
   )
     .orFail()
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         throw new Badrequest('Переданы некорректные данные');
@@ -100,7 +100,7 @@ exports.updateUserAvatar = (req, res, next) => {
     { new: true, runValidators: true },
   )
     .orFail()
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         throw new Badrequest('Переданы некорректные данные');

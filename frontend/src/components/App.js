@@ -42,7 +42,7 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i[0] === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api
@@ -172,19 +172,26 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
+    //alert('вот оно!!!');
   }, []);
 
   function tokenCheck() {
     const token = localStorage.getItem("token");
+    //const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzBjNmNhZDQyMjVmZGI2MDRhNjVjYTUiLCJpYXQiOjE2NjE5MzU0MTQsImV4cCI6MTY2MjU0MDIxNH0.TK4wUpHkYR76K25Qxdl3rYL3JM810Vfcha6cnZQyoNA";
     if (token) {
       auth.getContent(token).then((res) => {
+
+        //console.log(res.email);
         if (res) {
           setLoggedIn(true);
-          setUserEmail(res.data["email"]);
+          setUserEmail(res.email);
           history.push("/");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        
+      });
     }
   }
 

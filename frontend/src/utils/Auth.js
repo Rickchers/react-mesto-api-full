@@ -22,7 +22,8 @@ export const register = (email, password) => {
 
 //авторизация пользователя
 export const authorize = (email, password) => {
-  return fetch(`${BASE_URL}/signin`, {
+  //`${BASE_URL}/signin`
+  return fetch('http://localhost:3001/signin', {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -53,7 +54,8 @@ export const authorize = (email, password) => {
 
 //проверка токена
 export const getContent = (token) => {
-  return fetch(`${BASE_URL}/users/me`, {
+  //`${BASE_URL}/users/me`
+  return fetch("http://localhost:3001/users/me", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

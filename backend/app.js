@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 
 const validator = require('validator');
@@ -14,6 +15,7 @@ const { routes } = require('./src/routes/index');
 const { PORT = 3001 } = process.env;
 
 const app = express();
+app.use(cors());
 
 // подключаемся к серверу mongo
 async function main() {

@@ -12,7 +12,7 @@ exports.getCards = (req, res, next) => {
       if (!card) {
         throw new NotFoundError('Карта не найдена');
       }
-      res.send({ data: card });
+      res.send(card);
     })
     .catch(next);
 };
@@ -21,7 +21,7 @@ exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
   Card
     .create({ name, link, owner: req.user._id })
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         throw new Badrequest('Переданы некорректные данные');
@@ -51,7 +51,7 @@ exports.setLikeCard = (req, res, next) => {
     { new: true },
   )
     .orFail()
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'DocumentNotFoundError') {
         throw new NotFoundError('Нет карточки с указанным в запросе id');
@@ -67,7 +67,7 @@ exports.setDislikeCard = (req, res, next) => {
     { new: true },
   )
     .orFail()
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'DocumentNotFoundError') {
         throw new NotFoundError('Нет карточки с указанным в запросе id');
