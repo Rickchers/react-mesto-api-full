@@ -1,0 +1,7 @@
+.form {
+  /* display: grid;
+  grid-template-rows: 70px 120px auto; */
+}
+.form__section:nth-last-child(1) {
+  margin-top: 20px;
+}

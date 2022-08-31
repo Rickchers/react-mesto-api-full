@@ -1,0 +1,11 @@
+.header__menu-wrapper {
+  display: flex;
+  margin-left: auto;
+  margin-top: 7px;
+  align-items: baseline;
+  color: #FFFFFF;
+  font-family: Inter,Arial,sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+}

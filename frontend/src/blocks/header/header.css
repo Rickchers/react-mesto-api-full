@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  width: 100%;
+  border-bottom: solid rgba(84,84,84, .7) 1px;
+  margin: 45px 0 37px;
+}
+
+@media screen and (max-width: 320px) {
+  .header {
+    margin: 28px 0 42px;
+  }
+}

@@ -1,0 +1,6 @@
+.root {
+  max-width: 880px;
+  min-width: 320px;
+  margin: auto;
+  background-color: #000000;
+}

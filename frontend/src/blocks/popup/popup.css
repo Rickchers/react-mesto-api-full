@@ -1,0 +1,23 @@
+.popup {
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    transition: .8s opacity, .8s visibility;
+    
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    content: "";
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 320px) {
+    .popup {
+        min-width: 320px;
+    }
+  }
