@@ -122,6 +122,7 @@ exports.login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
+      res.header('Access-Control-Allow-Origin', 'http://localhost:3001');
       res.send({ token });
     })
     .catch(() => {
