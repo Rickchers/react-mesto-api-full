@@ -1,4 +1,4 @@
-export const BASE_URL = "http://api.rickchers.mesto.nomoredomains.sbs";
+export const BASE_URL = "http://localhost:3001";
 
 //аутентификация пользователя (регистрация)
 export const register = (email, password) => {
