@@ -1,7 +1,12 @@
 require('dotenv').config();
-console.log(process.env.NODE_ENV);
+
+// console.log(process.env.NODE_ENV);
 
 const cors = require('cors');
+
+const corsOption = {
+  origin: ['http://localhost:3001'],
+};
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -21,6 +26,7 @@ const { routes } = require('./src/routes/index');
 const { PORT = 3001 } = process.env;
 
 const app = express();
+app.use(cors(corsOption));
 app.use(cors());
 
 // подключаемся к серверу mongo
