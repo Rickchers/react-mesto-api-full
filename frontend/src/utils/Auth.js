@@ -1,9 +1,9 @@
-export const BASE_URL = "https://auth.nomoreparties.co";
+export const BASE_URL = "http://localhost:3001";
 
 //аутентификация пользователя (регистрация)
 export const register = (email, password) => {
   //`${BASE_URL}/signup`
-  return fetch('http://localhost:3001/signup', {
+  return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -24,7 +24,7 @@ export const register = (email, password) => {
 //авторизация пользователя
 export const authorize = (email, password) => {
   //`${BASE_URL}/signin`
-  return fetch('http://localhost:3001/signin', {
+  return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -56,7 +56,7 @@ export const authorize = (email, password) => {
 //проверка токена
 export const getContent = (token) => {
   //`${BASE_URL}/users/me`
-  return fetch("http://localhost:3001/users/me", {
+  return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

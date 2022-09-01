@@ -1,3 +1,6 @@
+require('dotenv').config();
+console.log(process.env.NODE_ENV);
+
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -5,6 +8,8 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 
 const { celebrate, Joi, errors } = require('celebrate');
+
+const { requestLogger, errorLogger } = require('./src/middlewares/logger');
 
 const userControllers = require('./src/controller/user');
 const auth = require('./src/middlewares/auth');
@@ -15,6 +20,7 @@ const { routes } = require('./src/routes/index');
 const { PORT = 3001 } = process.env;
 
 const app = express();
+
 app.use(cors());
 
 // подключаемся к серверу mongo
@@ -29,6 +35,8 @@ async function main() {
 main();
 
 app.use(express.json());
+
+app.use(requestLogger); // подключаем логгер запросов до всех обработчиков роутов
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
@@ -70,6 +78,8 @@ app.use((req, res, next) => {
 app.use(auth);
 
 app.use(routes);
+
+app.use(errorLogger); // подключаем логгер ошибок после обработчиков роутов и до обработчиков ошибок
 
 // здесь обрабатываем все ошибки
 

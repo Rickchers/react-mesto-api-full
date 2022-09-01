@@ -8,7 +8,7 @@ class Api {
     
     if (isLiked) {
       //`${this._url}cards/${id}/likes`
-      return fetch(`http://localhost:3001/cards/${id}/likes`, {
+      return fetch(`${this._url}cards/${id}/likes`, {
         method: 'DELETE',
         headers: this._headers
         // headers: {
@@ -19,7 +19,7 @@ class Api {
       .then(this._checkResponse);
     } else if (!isLiked) {
       //`${this._url}cards/${id}/likes`
-      return fetch(`http://localhost:3001/cards/${id}/likes`, {
+      return fetch(`${this._url}cards/${id}/likes`, {
         method: 'PUT',
         headers: this._headers
         // headers: {
@@ -34,7 +34,7 @@ class Api {
 
   getUserData() {
     //`${this._url}users/me`
-    return fetch('http://localhost:3001/users/me', {
+    return fetch(`${this._url}users/me`, {
       method: 'GET',
       headers: this._headers
       // headers: {
@@ -49,7 +49,7 @@ class Api {
 
   setUserData(name, about) {
     //`${this._url}users/me`
-    return fetch('http://localhost:3001/users/me', {
+    return fetch(`${this._url}users/me`, {
       method: 'PATCH',
       headers: this._headers,
       // headers: {
@@ -67,7 +67,7 @@ class Api {
 
   setAvatar(link) {
     //`${this._url}users/me/avatar`
-    return fetch('http://localhost:3001/users/me/avatar', {
+    return fetch(`${this._url}users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       // headers: {
@@ -84,7 +84,7 @@ class Api {
 
   removeCard(id) {
     //`${this._url}cards/${id}`
-    return fetch(`http://localhost:3001/cards/${id}`, {
+    return fetch(`${this._url}cards/${id}`, {
       method: 'DELETE',
       headers: this._headers
       // headers: {
@@ -104,7 +104,7 @@ class Api {
 
 
   getCards() {
-    return fetch('http://localhost:3001/cards/', {
+    return fetch(`${this._url}cards`, {
       method: 'GET',
       headers: this._headers
       // headers: {
@@ -117,7 +117,7 @@ class Api {
 
   postNewCard(data) {
     //`${this._url}cards`
-    return fetch('http://localhost:3001/cards', {
+    return fetch(`${this._url}cards`, {
       method: 'POST',
       headers: this._headers,
       // headers: {
@@ -136,7 +136,7 @@ class Api {
 const token = localStorage.getItem("token");
 
 const api = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-40/',
+  url: 'http://localhost:3001/',
   headers: {
     authorization: `Bearer ${token}`,
     'Content-Type': 'application/json'
