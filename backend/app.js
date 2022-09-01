@@ -1,12 +1,7 @@
 require('dotenv').config();
-
 // console.log(process.env.NODE_ENV);
 
 const cors = require('cors');
-
-const corsOption = {
-  origin: ['http://localhost:3001'],
-};
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -26,8 +21,13 @@ const { routes } = require('./src/routes/index');
 const { PORT = 3001 } = process.env;
 
 const app = express();
-app.use(cors(corsOption));
 app.use(cors());
+
+app.all('/*', (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  next();
+});
 
 // подключаемся к серверу mongo
 async function main() {
