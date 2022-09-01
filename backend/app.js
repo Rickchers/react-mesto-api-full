@@ -23,12 +23,6 @@ const { PORT = 3001 } = process.env;
 const app = express();
 app.use(cors());
 
-app.all('/*', (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
-  next();
-});
-
 // подключаемся к серверу mongo
 async function main() {
   await mongoose.connect('mongodb://localhost:27017/mestodb');

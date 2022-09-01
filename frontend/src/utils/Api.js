@@ -136,7 +136,7 @@ class Api {
 const token = localStorage.getItem("token");
 
 const api = new Api({
-  url: 'http://localhost:3001/',
+  url: 'http://api.rickchers.mesto.nomoredomains.sbs/',
   headers: {
     authorization: `Bearer ${token}`,
     'Content-Type': 'application/json'
