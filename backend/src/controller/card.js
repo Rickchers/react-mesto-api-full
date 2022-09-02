@@ -5,14 +5,10 @@ const Forbidden = require('../errors/forbidden');
 const Badrequest = require('../errors/badrequest');
 
 exports.getCards = (req, res, next) => {
-  // console.log(req.user);
   Card
-    .find({})
-    .then((card) => {
-      if (!card) {
-        throw new NotFoundError('Карта не найдена');
-      }
-      res.send(card);
+    .find({}).sort({ createdAt: -1 })
+    .then((cards) => {
+      res.send(cards);
     })
     .catch(next);
 };
@@ -24,7 +20,7 @@ exports.createCard = (req, res, next) => {
     .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        throw new Badrequest('Переданы некорректные данные');
+        next(new Badrequest('Переданы некорректные данные'));
       }
     })
     .catch(next);
@@ -39,7 +35,7 @@ exports.deleteCard = (req, res, next) => {
         return Card.findByIdAndRemove(card._id.toString())
           .then(() => res.send({ data: card }));
       }
-      throw new Forbidden('Вы не можете удалять чужие карточки');
+      next(new Forbidden('Вы не можете удалять чужие карточки'));
     })
     .catch(next);
 };
@@ -54,7 +50,7 @@ exports.setLikeCard = (req, res, next) => {
     .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'DocumentNotFoundError') {
-        throw new NotFoundError('Нет карточки с указанным в запросе id');
+        next(new NotFoundError('Нет карточки с указанным в запросе id'));
       }
     })
     .catch(next);
@@ -70,7 +66,7 @@ exports.setDislikeCard = (req, res, next) => {
     .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'DocumentNotFoundError') {
-        throw new NotFoundError('Нет карточки с указанным в запросе id');
+        next(new NotFoundError('Нет карточки с указанным в запросе id'));
       }
     })
     .catch(next);

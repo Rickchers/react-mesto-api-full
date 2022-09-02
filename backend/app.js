@@ -1,5 +1,6 @@
 require('dotenv').config();
-// console.log(process.env.NODE_ENV);
+
+console.log(process.env.NODE_ENV);
 
 const cors = require('cors');
 
@@ -13,7 +14,9 @@ const { celebrate, Joi, errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./src/middlewares/logger');
 
 const userControllers = require('./src/controller/user');
+
 const auth = require('./src/middlewares/auth');
+
 const { errorHandler } = require('./utils');
 
 const { routes } = require('./src/routes/index');
@@ -32,17 +35,24 @@ async function main() {
   console.log(`Server listen on port ${PORT}`);
 }
 
-main();
+// main();
 
 app.use(express.json());
 
 app.use(requestLogger); // подключаем логгер запросов до всех обработчиков роутов
 
+// краш-тест
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
-  }).unknown(true),
+  }),
 }), userControllers.login);
 
 const method = (value) => {
@@ -64,20 +74,11 @@ app.post('/signup', celebrate({
   }),
 }), userControllers.createUser);
 
-// логирование методов запроса
-/*
-app.use((req, res, next) => {
-  console.log(`
-    ${req.method}: ${req.path}
-    ${JSON.stringify(req.body)}
-    ${JSON.stringify(req.user._id)}
-  `);
-  next();
-});
-*/
 app.use(auth);
 
 app.use(routes);
+
+main();
 
 app.use(errorLogger); // подключаем логгер ошибок после обработчиков роутов и до обработчиков ошибок
 

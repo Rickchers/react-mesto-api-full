@@ -20,7 +20,7 @@ cardRoutes.get('/', cardControllers.getCards);
 
 cardRoutes.post('/', celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
+    name: Joi.string().min(2).max(30).required(),
     link: Joi.string().required().custom(method),
   }),
 }), cardControllers.createCard);
@@ -28,21 +28,21 @@ cardRoutes.post('/', celebrate({
 cardRoutes.delete('/:id', celebrate({
   // валидируем параметры id
   params: Joi.object().keys({
-    id: Joi.string().alphanum().length(24),
+    id: Joi.string().length(24).hex().required(),
   }),
 }), cardControllers.deleteCard);
 
 cardRoutes.put('/:id/likes', celebrate({
   // валидируем параметры id
   params: Joi.object().keys({
-    id: Joi.string().alphanum().length(24),
+    id: Joi.string().length(24).hex().required(),
   }),
 }), cardControllers.setLikeCard);
 
 cardRoutes.delete('/:id/likes', celebrate({
   // валидируем параметры id
   params: Joi.object().keys({
-    id: Joi.string().alphanum().length(24),
+    id: Joi.string().length(24).hex().required(),
   }),
 }), cardControllers.setDislikeCard);
 

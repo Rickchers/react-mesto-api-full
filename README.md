@@ -3,3 +3,5 @@
   
 Ссылка на сайт: http://rickchers.mesto.nomoredomains.sbs/
 запросы к API: http://api.rickchers.mesto.nomoredomains.sbs/ 
+
+ip сервера: 84.201.132.123

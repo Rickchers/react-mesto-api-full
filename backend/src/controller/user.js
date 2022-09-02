@@ -14,11 +14,8 @@ const { User } = require('../models/user');
 exports.getUsers = (req, res, next) => {
   User
     .find({})
-    .then((user) => {
-      if (!user) {
-        throw new NotFoundError('Пользователи не найдены');
-      }
-      res.send({ data: user });
+    .then((users) => {
+      res.send({ data: users });
     })
     .catch(next);
 };
@@ -27,13 +24,13 @@ exports.getUserbyId = (req, res, next) => {
   User.findById(req.params.id)
     .then((user) => {
       if (!user) {
-        throw new NotFoundError('Нет пользователя с таким id');
+        next(new NotFoundError('Нет пользователя с таким id'));
       }
       res.send({ data: user });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        throw new NotFoundError('Нет пользователя с таким id');
+        next(new Badrequest('Переданы некорректные данные'));
       }
     })
     .catch(next);
@@ -42,9 +39,6 @@ exports.getUserbyId = (req, res, next) => {
 exports.getUserProfile = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
-      if (!user) {
-        throw new NotFoundError('Пользователь не найден');
-      }
       res.send(user);
     })
     .catch(next);
@@ -70,7 +64,7 @@ exports.createUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.code === 11000) {
-        throw new ConflictRequest('Неправильные почта или пароль');
+        next(new ConflictRequest('Неправильные почта или пароль'));
       }
     })
     .catch(next);
@@ -87,7 +81,7 @@ exports.updateUser = (req, res, next) => {
     .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        throw new Badrequest('Переданы некорректные данные');
+        next(new Badrequest('Переданы некорректные данные'));
       }
     })
     .catch(next);
@@ -101,11 +95,11 @@ exports.updateUserAvatar = (req, res, next) => {
     { avatar },
     { new: true, runValidators: true },
   )
-    .orFail()
+    .orFail(() => next(new NotFoundError('Пользователь с этим_id не найден.')))
     .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        throw new Badrequest('Переданы некорректные данные');
+        next(new Badrequest('Переданы некорректные данные'));
       }
     })
     .catch(next);
@@ -122,11 +116,11 @@ exports.login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
-      res.send({ token });
-    })
-    .catch(() => {
-      // ошибка аутентификации
-      throw new Unauthorized('Неправильные почта или пароль');
+      res.send({ token })
+        .catch(() => {
+          // ошибка аутентификации
+          next(new Unauthorized('Неправильные почта или пароль'));
+        });
     })
     .catch(next);
 };
