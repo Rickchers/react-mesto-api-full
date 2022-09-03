@@ -142,7 +142,7 @@ class Api {
 }
 
 const api = new Api({
-  url: 'http://api.rickchers.mesto.nomoredomains.sbs/',
+  url: 'http://localhost:3001/',
   headers: {
     "Accept": "application/json",
     'Content-Type': 'application/json',
