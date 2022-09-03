@@ -1,12 +1,12 @@
-export const BASE_URL = "http://localhost:3001";
+export const BASE_URL = "http://api.rickchers.mesto.nomoredomains.sbs";
 
 //аутентификация пользователя (регистрация)
 export const register = (email, password) => {
-  //`${BASE_URL}/signup`
+  
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
-      Accept: "application/json",
+      "Accept": "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -23,11 +23,11 @@ export const register = (email, password) => {
 
 //авторизация пользователя
 export const authorize = (email, password) => {
-  //`${BASE_URL}/signin`
+  
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
-      Accept: "application/json",
+      "Accept": "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -55,12 +55,15 @@ export const authorize = (email, password) => {
 
 //проверка токена
 export const getContent = (token) => {
-  //`${BASE_URL}/users/me`
+  
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
+      "Accept": "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      "Authorization": `Bearer ${token}`,
     },
-  }).then((res) => res.json());
+  })
+  .then((res) => res.json())
+  .then(data => data);
 };

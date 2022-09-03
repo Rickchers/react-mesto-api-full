@@ -67,7 +67,7 @@ function App() {
       api.getCards().then((result) => {
         setCards(result);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
     }
   }, [loggedIn]);
 
@@ -167,20 +167,19 @@ function App() {
   function handleSignOut() {
     localStorage.removeItem("token");
     setLoggedIn(false);
+    setUserEmail('');
     history.push("/login");
   }
 
   useEffect(() => {
     tokenCheck();
-    //alert('вот оно!!!');
+    // alert('вот оно!!!');
   }, []);
 
   function tokenCheck() {
     const token = localStorage.getItem("token");
     if (token) {
       auth.getContent(token).then((res) => {
-
-        //console.log(res.email);
         if (res) {
           setLoggedIn(true);
           setUserEmail(res.email);

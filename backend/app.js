@@ -3,10 +3,8 @@ require('dotenv').config();
 console.log(process.env.NODE_ENV);
 
 const cors = require('cors');
-
 const express = require('express');
 const mongoose = require('mongoose');
-
 const validator = require('validator');
 
 const { celebrate, Joi, errors } = require('celebrate');
@@ -34,8 +32,7 @@ async function main() {
   await app.listen(PORT);
   console.log(`Server listen on port ${PORT}`);
 }
-
-// main();
+main();
 
 app.use(express.json());
 
@@ -77,8 +74,6 @@ app.post('/signup', celebrate({
 app.use(auth);
 
 app.use(routes);
-
-main();
 
 app.use(errorLogger); // подключаем логгер ошибок после обработчиков роутов и до обработчиков ошибок
 

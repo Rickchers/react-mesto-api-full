@@ -7,7 +7,6 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 const NotFoundError = require('../errors/not-found-err');
 const ConflictRequest = require('../errors/conflicting-request');
 const Badrequest = require('../errors/badrequest');
-const Unauthorized = require('../errors/unauthorized');
 
 const { User } = require('../models/user');
 
@@ -116,11 +115,7 @@ exports.login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
-      res.send({ token })
-        .catch(() => {
-          // ошибка аутентификации
-          next(new Unauthorized('Неправильные почта или пароль'));
-        });
+      res.send({ token });
     })
     .catch(next);
 };
