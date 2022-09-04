@@ -30,9 +30,10 @@ exports.getUserbyId = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new Badrequest('Переданы некорректные данные'));
+      } else {
+        next(err);
       }
-    })
-    .catch(next);
+    });
 };
 
 exports.getUserProfile = (req, res, next) => {
@@ -64,9 +65,10 @@ exports.createUser = (req, res, next) => {
     .catch((err) => {
       if (err.code === 11000) {
         next(new ConflictRequest('Неправильные почта или пароль'));
+      } else {
+        next(err);
       }
-    })
-    .catch(next);
+    });
 };
 
 exports.updateUser = (req, res, next) => {
@@ -81,9 +83,10 @@ exports.updateUser = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new Badrequest('Переданы некорректные данные'));
+      } else {
+        next(err);
       }
-    })
-    .catch(next);
+    });
 };
 
 exports.updateUserAvatar = (req, res, next) => {
@@ -99,9 +102,10 @@ exports.updateUserAvatar = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new Badrequest('Переданы некорректные данные'));
+      } else {
+        next(err);
       }
-    })
-    .catch(next);
+    });
 };
 
 exports.login = (req, res, next) => {

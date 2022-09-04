@@ -8,6 +8,7 @@ exports.getCards = (req, res, next) => {
   Card
     .find({}).sort({ createdAt: -1 })
     .then((cards) => {
+      // console.log(cards[0].likes.toString());
       res.send(cards);
     })
     .catch(next);
@@ -21,9 +22,10 @@ exports.createCard = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new Badrequest('Переданы некорректные данные'));
+      } else {
+        next(err);
       }
-    })
-    .catch(next);
+    });
 };
 
 exports.deleteCard = (req, res, next) => {
@@ -51,9 +53,10 @@ exports.setLikeCard = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'DocumentNotFoundError') {
         next(new NotFoundError('Нет карточки с указанным в запросе id'));
+      } else {
+        next(err);
       }
-    })
-    .catch(next);
+    });
 };
 
 exports.setDislikeCard = (req, res, next) => {
@@ -67,7 +70,8 @@ exports.setDislikeCard = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'DocumentNotFoundError') {
         next(new NotFoundError('Нет карточки с указанным в запросе id'));
+      } else {
+        next(err);
       }
-    })
-    .catch(next);
+    });
 };

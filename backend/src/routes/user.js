@@ -11,7 +11,7 @@ userRoutes.get('/', userControllers.getUsers);
 userRoutes.get('/:id', celebrate({
   // валидируем параметры id
   params: Joi.object().keys({
-    id: Joi.string().hex().length(24),
+    id: Joi.string().hex().length(24).required(),
   }),
 }), userControllers.getUserbyId);
 

@@ -42,7 +42,7 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i[0] === currentUser._id);
+    const isLiked = card.likes.some((i) => i.toString() === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api
@@ -173,7 +173,6 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
-    // alert('вот оно!!!');
   }, []);
 
   function tokenCheck() {

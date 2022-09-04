@@ -22,25 +22,16 @@ class Api {
   changeLikeCardStatus(id, isLiked) {
     
     if (isLiked) {
-      //`${this._url}cards/${id}/likes`
-      return fetch(`${this._url}cards/${id}/likes`, {
+        return fetch(`${this._url}cards/${id}/likes`, {
         method: 'DELETE',
         headers: this._getHeaders()
-        // headers: {
-        //   authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzBjNmNhZDQyMjVmZGI2MDRhNjVjYTUiLCJpYXQiOjE2NjE5MzU0MTQsImV4cCI6MTY2MjU0MDIxNH0.TK4wUpHkYR76K25Qxdl3rYL3JM810Vfcha6cnZQyoNA',
-        //   'Content-Type': 'application/json'
-        // }
       })
       .then(this._checkResponse);
     } else if (!isLiked) {
-      //`${this._url}cards/${id}/likes`
-      return fetch(`${this._url}cards/${id}/likes`, {
+        
+        return fetch(`${this._url}cards/${id}/likes`, {
         method: 'PUT',
         headers: this._getHeaders()
-        // headers: {
-        //   authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzBjNmNhZDQyMjVmZGI2MDRhNjVjYTUiLCJpYXQiOjE2NjE5MzU0MTQsImV4cCI6MTY2MjU0MDIxNH0.TK4wUpHkYR76K25Qxdl3rYL3JM810Vfcha6cnZQyoNA',
-        //   'Content-Type': 'application/json'
-        // }
       })
       .then(this._checkResponse);
     }   
